@@ -1,6 +1,7 @@
 // import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 // import * as flowersApi from "../services/flovershelf-api";
+import s from "../pages/AchimenesPage/AchimenesPage.module.css";
 
 export default function GeranDetailsView({ gerans }) {
   const { geranId } = useParams();
@@ -12,9 +13,14 @@ export default function GeranDetailsView({ gerans }) {
   return (
     <>
       <hr />
-      <img src={geran.imgUrl} alt={geran.title} width={200} />
-      <h2>{geran.title}</h2>
-      <p>{geran.descr}</p>
+      <div className={s.cardView}>
+        <div className={s.card}>
+          <img src={geran.imgUrl} alt={geran.title} width={316} />
+          <h2 className={s.name}>{geran.title}</h2>
+        </div>
+
+        <p className={s.descr}>{geran.descr}</p>
+      </div>
     </>
   );
 }

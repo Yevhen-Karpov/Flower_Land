@@ -35,11 +35,13 @@ export default function ViolesPage() {
         «колекціонера», та й простого квітникаря набагато легшим.
       </p>
       {violets && (
-        <ul>
+        <ul className={s.wrapper}>
           {violets.map((violet) => (
-            <li key={violet.id}>
-              <img src={violet.imgUrl} alt={violet.title} width={200} />
-              <Link to={`${url}/${violet.id}`}>{violet.title}</Link>
+            <li key={violet.id} className={s.card}>
+              <img src={violet.imgUrl} alt={violet.title} className={s.img} />
+              <Link to={`${url}/${violet.id}`} className={s.name}>
+                {violet.title}
+              </Link>
             </li>
           ))}
         </ul>

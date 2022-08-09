@@ -29,11 +29,13 @@ export default function GeranPage() {
         переконатися, що це не буде шкідливим.
       </p>
       {gerans && (
-        <ul>
+        <ul className={s.wrapper}>
           {gerans.map((geran) => (
-            <li key={geran.id}>
-              <img src={geran.imgUrl} alt={geran.title} width={200} />
-              <Link to={`${url}/${geran.id}`}>{geran.title}</Link>
+            <li key={geran.id} className={s.card}>
+              <img src={geran.imgUrl} alt={geran.title} className={s.img} />
+              <Link to={`${url}/${geran.id}`} className={s.name}>
+                {geran.title}
+              </Link>
             </li>
           ))}
         </ul>
