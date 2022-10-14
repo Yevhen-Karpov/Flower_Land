@@ -1,13 +1,17 @@
 import React from "react";
 import { FaInstagram, FaFacebookF, FaTelegramPlane } from "react-icons/fa";
+import Modal from "../Modal/Modal";
 import Logo from "../../images/olx-329.svg";
 
 export default function Footer() {
+  const [isModalOpen, setIsModalOpen] = React.useState(false);
+  const toggleModal = () => setIsModalOpen(!isModalOpen);
+
   return (
     <footer className="footer">
       <div className="container footer__container">
         <div className="">
-          <a href="./index.html" className="logo footer__logo">
+          <a href="/" className="logo footer__logo">
             Flowers<span className="footer__span">Shop</span>
           </a>
           <address className="footer__address">
@@ -81,7 +85,11 @@ export default function Footer() {
               className="footer__form-email"
               placeholder="E-mail"
             />
-            <button type="submit" className="footer__form-btn">
+            <button
+              type="button"
+              className="footer__form-btn"
+              onClick={toggleModal}
+            >
               Підписатися
               {/* <svg className="submit-icon" width="24" height="24">
                 <use href="./images/sprite.svg#icon-send"></use>
@@ -91,6 +99,7 @@ export default function Footer() {
           </form>
         </div>
       </div>
+      {isModalOpen && <Modal onClose={toggleModal} />}
     </footer>
   );
 }

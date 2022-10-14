@@ -1,15 +1,18 @@
 import { useEffect, useState } from "react";
 import { Link, useRouteMatch, Route } from "react-router-dom";
-import { getGeran } from "../../services/flovershelf-api";
+import { getGerans } from "../../services/ApiServices";
 import GeranDetailsView from "../../views/GeranDetailsView";
+import { animateScroll as scroll } from "react-scroll";
 import s from "./GeranPage.module.css";
 
 export default function GeranPage() {
   const { url, path } = useRouteMatch();
-  const [gerans, setGerans] = useState(null);
+  const [gerans, setGerans] = useState([]);
   useEffect(() => {
-    getGeran().then(setGerans);
+    getGerans().then(setGerans);
+    scroll.scrollMore(400);
   }, []);
+  console.log(gerans);
   return (
     <div className={s.container}>
       <h1 className={s.title}>Герані</h1>
@@ -31,9 +34,9 @@ export default function GeranPage() {
       {gerans && (
         <ul className={s.wrapper}>
           {gerans.map((geran) => (
-            <li key={geran.id} className={s.card}>
+            <li key={geran._id} className={s.card}>
               <img src={geran.imgUrl} alt={geran.title} className={s.img} />
-              <Link to={`${url}/${geran.id}`} className={s.name}>
+              <Link to={`${url}/${geran._id}`} className={s.name}>
                 {geran.title}
               </Link>
             </li>

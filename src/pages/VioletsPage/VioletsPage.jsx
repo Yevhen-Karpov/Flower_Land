@@ -1,16 +1,18 @@
 import { useState, useEffect } from "react";
 import { Link, useRouteMatch, Route } from "react-router-dom";
-import { getViolets } from "../../services/flovershelf-api";
+import { animateScroll as scroll } from "react-scroll";
+import { getViolets } from "../../services/ApiServices";
 import VioletsDetailsView from "../../views/VioletsDetailsView";
 import s from "./VioletsPage.module.css";
 
 export default function ViolesPage() {
   const { url, path } = useRouteMatch();
-  const [violets, setViolets] = useState(null);
+  const [violets, setViolets] = useState([]);
   useEffect(() => {
     getViolets().then(setViolets);
+    scroll.scrollMore(400);
   }, []);
-
+  console.log(violets);
   return (
     <div className={s.container}>
       <h1 className={s.title}>Фіалки</h1>
@@ -37,9 +39,9 @@ export default function ViolesPage() {
       {violets && (
         <ul className={s.wrapper}>
           {violets.map((violet) => (
-            <li key={violet.id} className={s.card}>
+            <li key={violet._id} className={s.card}>
               <img src={violet.imgUrl} alt={violet.title} className={s.img} />
-              <Link to={`${url}/${violet.id}`} className={s.name}>
+              <Link to={`${url}/${violet._id}`} className={s.name}>
                 {violet.title}
               </Link>
             </li>

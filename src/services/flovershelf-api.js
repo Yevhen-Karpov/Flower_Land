@@ -1,4 +1,4 @@
-const BASE_URL = "http://localhost:4040";
+const BASE_URL = "https://flowers-gallery.herokuapp.com";
 
 async function getFlowers(url = "", config = {}) {
   let response = await fetch(url);
@@ -7,8 +7,8 @@ async function getFlowers(url = "", config = {}) {
     ? await response.json()
     : Promise.reject(new Error("Failed to get flowers"));
 }
-export function getAchimenes() {
-  return getFlowers(`${BASE_URL}/achimenes`);
+export default function getAchimenes() {
+  return getFlowers(`${BASE_URL}/api/achimenes`);
 }
 
 export function getViolets() {

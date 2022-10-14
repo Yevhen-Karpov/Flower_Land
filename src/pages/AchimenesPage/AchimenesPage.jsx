@@ -1,16 +1,24 @@
 import { useState, useEffect } from "react";
 import { Link, useRouteMatch, Route } from "react-router-dom";
-import { getAchimenes } from "../../services/flovershelf-api";
+import { useDispatch } from "react-redux";
+import { animateScroll as scroll } from "react-scroll";
+import fetchAllAchimenes from "../../redux/flowers/flowers-operations";
+import { getAchimenes } from "../../services/ApiServices";
 import AchimenesDetailsView from "../../views/AchimenesDetailsView";
+
 import s from "./AchimenesPage.module.css";
 
 export default function AchimenesPage() {
   const { url, path } = useRouteMatch();
-  const [achimenes, setAchimenes] = useState(null);
+  const [achimenes, setAchimenes] = useState([]);
+  const dispatch = useDispatch();
 
+  console.log(getAchimenes());
   useEffect(() => {
     getAchimenes().then(setAchimenes);
+    scroll.scrollMore(400);
   }, []);
+  console.log(achimenes);
   return (
     <div className={s.container}>
       <h1 className={s.title}>Ахіменеси</h1>
@@ -26,12 +34,12 @@ export default function AchimenesPage() {
         місяців. На зиму, коли він починається, ахіменес обрізають, а бульби
         ховають в темне прохолодне місце.
       </p>
-      {achimenes && (
+      {achimenes.length && (
         <ul className={s.wrapper}>
           {achimenes.map((achimen) => (
-            <li key={achimen.id} className={s.card}>
+            <li key={achimen._id} className={s.card}>
               <img src={achimen.imgUrl} alt={achimen.title} className={s.img} />
-              <Link to={`${url}/${achimen.id}`} className={s.name}>
+              <Link to={`${url}/${achimen._id}`} className={s.name}>
                 {achimen.title}
               </Link>
             </li>

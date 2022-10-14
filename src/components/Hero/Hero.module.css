@@ -29,11 +29,11 @@
 }
 .hero {
   width: 100%;
-  padding-top: 118px;
-  padding-bottom: 18px;
-  background-position: center;
+  /* padding-top: 18px;
+  padding-bottom: 18px; */
+  background-position: top;
   background-repeat: no-repeat;
-  background-size: cover;
+  background-size: 100%;
   background-color: #c4c4c4;
   background-image: -webkit-gradient(
       linear,
@@ -172,8 +172,8 @@
   .hero {
     max-width: 1600px;
 
-    padding-top: 200px;
-    padding-bottom: 120px;
+    padding-top: 140px;
+    padding-bottom: 32px;
   }
 }
 .title {

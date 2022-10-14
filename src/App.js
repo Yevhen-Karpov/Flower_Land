@@ -5,6 +5,9 @@ import Footer from "./components/Footer/Footer";
 import AchimenesPage from "./pages/AchimenesPage/AchimenesPage";
 import VioletsPage from "./pages/VioletsPage/VioletsPage";
 import GeranPage from "./pages/GeranPage/GeranPage";
+import LoginForm from "./pages/LoginPage/LoginForm";
+import RegisterForm from "./pages/RegisterPage/RegisterForm";
+import { PrivateRoute, PublicRoute } from "./components/Routes";
 // import AchimenesDetailsView from "./views/AchimenesDetailsView";
 // import VioletsDetailsView from "./views/VioletsDetailsView";
 // import GeranDetailsView from "./views/GeranDetailsView";
@@ -21,6 +24,8 @@ export default function App() {
         {/* <Route path="/violets/:violetId" component={VioletsDetailsView} /> */}
         <Route path="/gerans" component={GeranPage} />
         {/* <Route path="/gerans/:geranId" component={GeranDetailsView} /> */}
+        <Route path="/login" restricted component={LoginForm} />
+        <Route path="/register" restricted component={RegisterForm} />
       </Switch>
       <Footer />
     </>

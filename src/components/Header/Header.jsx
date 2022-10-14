@@ -1,17 +1,22 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-import { BsEnvelope, BsTelephone, BsMenuUp } from "react-icons/bs";
+import { BsEnvelope, BsTelephone, BsMenuUp, BsXCircle } from "react-icons/bs";
 import logo from "../../images/pngwing.png";
 import s from "./Header.module.css";
+import AuthNav from "./AuthNav";
 import Navigation from "./Navigation";
+import LoginForm from "../../pages/LoginPage/LoginForm";
+import RegisterForm from "../../pages/RegisterPage/RegisterForm";
 
 // var classNames = require("classnames");
 
 export default function Header() {
+  const [isModalOpen, setIsModalOpen] = React.useState(false);
+  const toggleModal = () => setIsModalOpen(!isModalOpen);
   return (
     <header className={s.header}>
       <div className={s.container}>
-        <a href="/" className={s.logo} activeClassName={s.active}>
+        <a href="/" className={s.logo}>
           <img src={logo} alt="logo" className={s.logoImg} />
         </a>
         <button className={s.mobileMenuBtn} data-menu-button>
@@ -75,22 +80,7 @@ export default function Header() {
             </li>
           </ul>
         </nav>
-        {/* <ul className={s.contact}> */}
-        {/* <li className={s.contactItem}>
-            <a href="mailto:info@devstudio.com" className={s.contactNavLink}>
-              
-              <BsEnvelope className={s.contactIcon} />
-              info@devstudio.com
-            </a>
-          </li> */}
-        {/* <li className={s.contactItem}>
-            <a href="tel:+380961111111" className={s.contactNavLink}>
-             
-              <BsTelephone className={s.contactIcon} />
-              +38 096 111 11 11
-            </a>
-          </li>
-        </ul> */}
+        <AuthNav />
       </div>
       <div className="mobile-menu" data-menu>
         <div className="container mobile-menu__container">
@@ -167,6 +157,8 @@ export default function Header() {
             </li>
           </ul>
         </div>
+        {isModalOpen && <LoginForm onClose={toggleModal} />}
+        {isModalOpen && <RegisterForm onClose={toggleModal} />}
       </div>
     </header>
   );
