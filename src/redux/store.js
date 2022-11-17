@@ -1,4 +1,4 @@
-import { configureStore } from "@reduxjs/toolkit";
+import { configureStore, getDefaultMiddleware } from "@reduxjs/toolkit";
 import storage from "redux-persist/lib/storage";
 import {
   persistStore,
@@ -10,31 +10,37 @@ import {
   PURGE,
   REGISTER,
 } from "redux-persist";
-
-import authorizationReducer from "./auth/auth-reducer";
-import flowersReducers from "./flowers/flowers-reducers";
-// import transactionsReducer from "./transactions/transactions-reducer";
-// import { balanceReducer } from "./balance";
+import logger from "redux-logger";
+import authorizationReducer from "../redux/auth/auth-slice";
+import collectionsReducer from "../redux/collections/collections-reducer";
 
 const authPersistConfig = {
   key: "auth",
   storage,
-  whitelist: ["authReducer"],
+  whitelist: ["token"],
 };
+
+const middleware = [
+  ...getDefaultMiddleware({
+    serializableCheck: {
+      ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+    },
+  }),
+  logger,
+];
 
 export const store = configureStore({
   reducer: {
     auth: persistReducer(authPersistConfig, authorizationReducer),
-    flowers: flowersReducers,
-    // transactions: transactionsReducer,
-    // balance: balanceReducer,
+    // collections: collectionsReducer,
   },
-  middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware({
-      serializableCheck: {
-        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
-      },
-    }),
+  middleware,
+  // middleware: (getDefaultMiddleware) =>
+  //   getDefaultMiddleware({
+  //     serializableCheck: {
+  //       ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+  //     },
+  //   }),
   devTools: process.env.NODE_ENV === "development",
 });
 

@@ -8,11 +8,12 @@ import s from "./VioletsPage.module.css";
 export default function ViolesPage() {
   const { url, path } = useRouteMatch();
   const [violets, setViolets] = useState([]);
+
   useEffect(() => {
     getViolets().then(setViolets);
     scroll.scrollMore(400);
   }, []);
-  console.log(violets);
+
   return (
     <div className={s.container}>
       <h1 className={s.title}>Фіалки</h1>
@@ -39,7 +40,11 @@ export default function ViolesPage() {
       {violets && (
         <ul className={s.wrapper}>
           {violets.map((violet) => (
-            <li key={violet._id} className={s.card}>
+            <li
+              key={violet._id}
+              className={s.card}
+              onClick={() => scroll.scrollMore(600)}
+            >
               <img src={violet.imgUrl} alt={violet.title} className={s.img} />
               <Link to={`${url}/${violet._id}`} className={s.name}>
                 {violet.title}

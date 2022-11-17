@@ -4,7 +4,10 @@ axios.defaults.baseURL = "https://flowers-gallery.herokuapp.com";
 class ApiServices {
   async signIn(userData) {
     try {
-      const { data } = await axios.post("/api/auth/login", userData);
+      const { data, status } = await axios.post("/api/auth/login", userData);
+      if (status < 300) {
+        getCollection();
+      }
       return data.payload;
     } catch (e) {
       console.log(e.message);
@@ -54,6 +57,7 @@ export async function getAchimenes() {
 export async function getViolets() {
   try {
     const { data } = await axios.get("/api/violets");
+    console.log(data.data.result);
     return data.data.result;
   } catch (e) {
     console.log(e.message);
@@ -63,6 +67,7 @@ export async function getViolets() {
 export async function getGerans() {
   try {
     const { data } = await axios.get("/api/gerans");
+    console.log(data.data.result);
     return data.data.result;
   } catch (e) {
     console.log(e.message);
@@ -119,6 +124,36 @@ export async function addViolet(violet) {
 export async function addGeran(geran) {
   try {
     const { data } = await axios.post("/api/gerans", geran);
+    return data;
+  } catch (e) {
+    console.log(e.message);
+  }
+}
+
+export async function getCollection() {
+  try {
+    const { data } = await axios.get("/api/collections");
+    console.log(data.data.result);
+    return data.data.result;
+  } catch (e) {
+    console.log(e.message);
+  }
+}
+
+export async function addCollection(collection) {
+  try {
+    const { data } = await axios.post("/api/collections", collection);
+    console.log(data);
+    return data;
+  } catch (e) {
+    console.log(e.message);
+  }
+}
+
+export async function deleteCollection(id) {
+  try {
+    const { data } = await axios.delete(`/api/collections/${id}`);
+    console.log(data);
     return data;
   } catch (e) {
     console.log(e.message);

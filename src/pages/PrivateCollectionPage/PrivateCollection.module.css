@@ -1,0 +1,102 @@
+.container {
+  width: 100%;
+  min-height: 266px;
+  padding-top: 28px;
+  padding-bottom: 28px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-color: #c4c4c4;
+  background-image: -webkit-gradient(
+      linear,
+      left top,
+      right top,
+      from(rgba(47, 48, 58, 0.4)),
+      to(rgba(47, 48, 58, 0.4))
+    ),
+    url("../../images/indoor-plants.jpeg");
+  background-image: linear-gradient(
+      to right,
+      rgba(47, 48, 58, 0.4),
+      rgba(47, 48, 58, 0.4)
+    ),
+    url("../../images/indoor-plants.jpeg");
+}
+
+.text {
+  /* width: 100%;
+  max-width: 600px;
+  margin: 0 auto; */
+  font-size: 24px;
+  text-align: center;
+  color: rgb(182, 241, 203);
+}
+.wrapper {
+  display: grid;
+  padding: 4px 16px;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-column-gap: 16px;
+  grid-row-gap: 16px;
+}
+.img {
+  width: 100%;
+  height: 300px;
+}
+.card {
+  border: 1px solid #ccc;
+  box-shadow: 3px 5px 15px 5px #4f6b4e;
+  cursor: pointer;
+}
+.name {
+  display: block;
+  width: 100%;
+  position: relative;
+  font-size: 24px;
+  color: rgb(8, 52, 9);
+  font-weight: 600;
+  text-align: center;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  text-decoration: none;
+  border: inherit;
+  outline: none;
+
+  background-color: rgb(210, 255, 226);
+  overflow: hidden;
+}
+.cardOverlay {
+  width: 100%;
+  height: 100%;
+}
+.overlay {
+  position: absolute;
+  text-align: center;
+  height: 100%;
+  width: 100%;
+  font-weight: 700;
+  top: 0;
+  right: 0;
+  padding-top: 18px;
+  padding-bottom: 20px;
+  font-size: 24px;
+  line-height: 1.55;
+  letter-spacing: 0.03em;
+  color: rgb(8, 52, 9);
+  background-image: linear-gradient(
+    45deg,
+    rgb(254 107 139) 30%,
+    rgb(255 142 83) 90%
+  );
+
+  transform: translatey(100%);
+
+  transition: transform 250ms linear;
+
+  overflow: auto;
+}
+.card:hover .overlay {
+  transform: translatey(0);
+}
+.card:hover .cardOverlay {
+  opacity: 0.3;
+}

@@ -1,31 +1,61 @@
-import { Switch, Route } from "react-router-dom";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { Switch } from "react-router-dom";
+import { Suspense, lazy } from "react";
+import authOperations from "./redux/auth/auth-operations";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 import HomePage from "./pages/HomePage/HomePage";
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
-import AchimenesPage from "./pages/AchimenesPage/AchimenesPage";
-import VioletsPage from "./pages/VioletsPage/VioletsPage";
-import GeranPage from "./pages/GeranPage/GeranPage";
-import LoginForm from "./pages/LoginPage/LoginForm";
-import RegisterForm from "./pages/RegisterPage/RegisterForm";
-import { PrivateRoute, PublicRoute } from "./components/Routes";
-// import AchimenesDetailsView from "./views/AchimenesDetailsView";
-// import VioletsDetailsView from "./views/VioletsDetailsView";
-// import GeranDetailsView from "./views/GeranDetailsView";
+import PrivateRoute from "./components/Routes/PrivateRoute";
+import PublicRoute from "./components/Routes/PublicRoute";
+
+const AchimenesPage = lazy(() => import("./pages/AchimenesPage/AchimenesPage"));
+const VioletsPage = lazy(() => import("./pages/VioletsPage/VioletsPage"));
+const GeranPage = lazy(() => import("./pages/GeranPage/GeranPage"));
+const PrivateCollectionPage = lazy(() =>
+  import("./pages/PrivateCollectionPage/PrivateCollectionPage")
+);
+const LoginForm = lazy(() => import("./pages/LoginPage/LoginForm"));
+const RegisterForm = lazy(() => import("./pages/RegisterPage/RegisterForm"));
 
 export default function App() {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(authOperations.fetchCurrentUser());
+  }, [dispatch]);
+
   return (
     <>
+      <ToastContainer autoClose={5000} pauseOnHover theme="colored" />
       <Header />
       <Switch>
-        <Route path="/" exact component={HomePage} />
-        <Route path="/achimenes" component={AchimenesPage} />
-        {/* <Route path="/achimenes/:achimeneId" component={AchimenesDetailsView} /> */}
-        <Route path="/violets" component={VioletsPage} />
-        {/* <Route path="/violets/:violetId" component={VioletsDetailsView} /> */}
-        <Route path="/gerans" component={GeranPage} />
-        {/* <Route path="/gerans/:geranId" component={GeranDetailsView} /> */}
-        <Route path="/login" restricted component={LoginForm} />
-        <Route path="/register" restricted component={RegisterForm} />
+        <Suspense fallback={<h1>Loading...</h1>}>
+          <PublicRoute path="/" exact component={HomePage} />
+
+          <PublicRoute path="/achimenes" component={AchimenesPage} />
+
+          <PublicRoute path="/violets" component={VioletsPage} />
+
+          <PublicRoute path="/gerans" component={GeranPage} />
+
+          <PublicRoute
+            path="/login"
+            restricted
+            redirectTo="/collections"
+            component={LoginForm}
+          />
+          <PublicRoute path="/register" restricted component={RegisterForm} />
+
+          <PrivateRoute
+            path="/collections"
+            component={PrivateCollectionPage}
+            redirectTo="/login"
+          />
+        </Suspense>
       </Switch>
       <Footer />
     </>

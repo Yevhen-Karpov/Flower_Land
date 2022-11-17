@@ -40,34 +40,21 @@ export default function Footer() {
           <ul className="list social">
             <li className="social__item">
               <a href="#" className="social__link footer__social-link">
-                {/* <svg className="social__icon footer__icon" width="44" height="44">
-                  <use href="./images/sprite.svg#icon-insta"></use>
-                </svg> */}
                 <FaInstagram className="social__icon footer__icon" />
               </a>
             </li>
             <li className="social__item">
               <a href="#" className="social__link footer__social-link">
-                {/* <svg className="social__icon footer__icon" width="44" height="44">
-                  <use href="./images/sprite.svg#icon-twit"></use>
-                </svg> */}
                 <FaFacebookF className="social__icon footer__icon" />
               </a>
             </li>
             <li className="social__item">
               <a href="#" className="social__link footer__social-link">
-                {/* <svg className="social__icon footer__icon" width="44" height="44">
-                  <use href="./images/sprite.svg#icon-facebook"></use>
-                </svg> */}
                 <FaTelegramPlane className="social__icon footer__icon" />
               </a>
             </li>
             <li className="social__item">
               <a href="#" className="social__link footer__social-link">
-                {/* <svg className="social__icon footer__icon" width="44" height="44">
-                  <use href="../../images/olx-329.svg"></use>
-                </svg> */}
-                {/* <img src="../../images/olx-329.svg" alt="linkedin" /> */}
                 <img
                   src={Logo}
                   className="social__icon footer__icon"
@@ -91,9 +78,6 @@ export default function Footer() {
               onClick={toggleModal}
             >
               Підписатися
-              {/* <svg className="submit-icon" width="24" height="24">
-                <use href="./images/sprite.svg#icon-send"></use>
-              </svg> */}
               <FaTelegramPlane className="submit-icon" />
             </button>
           </form>

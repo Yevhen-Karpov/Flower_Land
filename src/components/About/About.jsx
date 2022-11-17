@@ -1,11 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
-
-import st from "../Hero/Hero.module.css";
-import s from "./About.module.css";
 import arch from "../../images/flowers/achimenes.jpg";
 import viol from "../../images/flowers/violets.jpg";
 import heran from "../../images/flowers/heran.jpg";
+import st from "../Hero/Hero.module.css";
+import s from "./About.module.css";
 
 export default function About() {
   return (

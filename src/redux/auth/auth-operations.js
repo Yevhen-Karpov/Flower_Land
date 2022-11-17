@@ -1,7 +1,6 @@
 import axios from "axios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { toast } from "react-toastify";
-// import { useTranslation } from "react-i18next";
 
 const token = {
   set(token) {
@@ -15,22 +14,18 @@ const token = {
 export const register = createAsyncThunk(
   "auth/register",
   async (credentials, { rejectWithValue }) => {
-    // const { t } = useTranslation();
-
     try {
       const { data } = await axios.post(
-        "https://flowers-gallery.herokuapp.com/api/auth/signup",
+        "https://flowers-gallery.herokuapp.com/api/auth/register",
         credentials
       );
-      token.set(data.payload.token);
-      // toast.success(t('register_success'));
+      token.set(data.data.token);
       toast.success(
-        "Your registration has been successfully completed. You have just been sent an email containing membership activation instructions"
+        "Ваша реєстрація пройшла успішно. Ви можете увійти в свій акаунт"
       );
       return data;
     } catch (error) {
-      // toast.error(t('error_something'));
-      toast.error("Something went wrong! Please, try again");
+      toast.error("Щось пішло не так. Перевірте правильність введених даних");
       return rejectWithValue(error.message);
     }
   }
@@ -39,31 +34,25 @@ export const register = createAsyncThunk(
 export const logIn = createAsyncThunk(
   "auth/login",
   async (credentials, { rejectWithValue }) => {
-    // const { t } = useTranslation();
     try {
       const { data } = await axios.post(
         "https://flowers-gallery.herokuapp.com/api/auth/login",
         credentials
       );
-      token.set(data.payload.token);
-      return data.payload;
+      token.set(data.data.token);
+      return data;
     } catch (error) {
-      // toast.error(t('error_something'));
-      toast.error("Something went wrong! Please, try again");
+      toast.error("Щось пішло не так. Перевірте правильність введених даних");
       return rejectWithValue(error.message);
     }
   }
 );
 
 export const logOut = createAsyncThunk("auth/logout", async () => {
-  // const { t } = useTranslation();
-
   try {
     await axios.get("https://flowers-gallery.herokuapp.com/api/auth/logout");
     token.unset();
   } catch (error) {
-    // toast.error(t('error_something'));
-    toast.error("Something went wrong! Please, try again");
     return error.message;
   }
 });
@@ -72,9 +61,10 @@ export const fetchCurrentUser = createAsyncThunk(
   "auth/refresh",
   async (_, thunkAPI) => {
     const state = thunkAPI.getState();
-    const persistedToken = state.auth.authReducer.token;
+    const persistedToken = state.auth.token;
+
     if (persistedToken === null) {
-      return;
+      return thunkAPI.rejectWithValue();
     }
     token.set(persistedToken);
     try {
@@ -87,3 +77,12 @@ export const fetchCurrentUser = createAsyncThunk(
     }
   }
 );
+
+const authOperations = {
+  register,
+  logIn,
+  logOut,
+  fetchCurrentUser,
+};
+
+export default authOperations;

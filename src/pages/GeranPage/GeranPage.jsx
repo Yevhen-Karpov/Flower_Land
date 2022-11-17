@@ -8,11 +8,12 @@ import s from "./GeranPage.module.css";
 export default function GeranPage() {
   const { url, path } = useRouteMatch();
   const [gerans, setGerans] = useState([]);
+
   useEffect(() => {
     getGerans().then(setGerans);
     scroll.scrollMore(400);
   }, []);
-  console.log(gerans);
+
   return (
     <div className={s.container}>
       <h1 className={s.title}>Герані</h1>
@@ -34,7 +35,11 @@ export default function GeranPage() {
       {gerans && (
         <ul className={s.wrapper}>
           {gerans.map((geran) => (
-            <li key={geran._id} className={s.card}>
+            <li
+              key={geran._id}
+              className={s.card}
+              onClick={() => scroll.scrollMore(600)}
+            >
               <img src={geran.imgUrl} alt={geran.title} className={s.img} />
               <Link to={`${url}/${geran._id}`} className={s.name}>
                 {geran.title}

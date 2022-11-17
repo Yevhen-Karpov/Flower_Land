@@ -1,10 +1,14 @@
 // import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { useSelector } from "react-redux";
+import authSelectors from "../redux/auth/auth-selectors";
+import { addCollection } from "../services/ApiServices";
 import s from "../pages/AchimenesPage/AchimenesPage.module.css";
 // import getVioletById from "../services/ApiServices";
 // import * as flowersApi from "../services/flovershelf-api";
 
 export default function VioletsDetailsView({ violets }) {
+  const isLoggedIn = useSelector(authSelectors.getIsLoggedIn);
   const { violetId } = useParams();
   console.log(violets);
   const violet = violets.find((violet) => violet._id === violetId);
@@ -14,6 +18,11 @@ export default function VioletsDetailsView({ violets }) {
   // }, [violetId]);
   const onBack = () => {
     window.history.back();
+  };
+
+  const onAddToCollection = () => {
+    console.log(violet);
+    addCollection(violet);
   };
 
   return (
@@ -29,7 +38,11 @@ export default function VioletsDetailsView({ violets }) {
           <button className={s.button} onClick={onBack}>
             Повернутись до колекції
           </button>
-          <button className={s.button}>Додати до приватної колекції</button>
+          {isLoggedIn && (
+            <button className={s.button} onClick={onAddToCollection}>
+              Додати до приватної колекції
+            </button>
+          )}
         </div>
       </div>
     </>

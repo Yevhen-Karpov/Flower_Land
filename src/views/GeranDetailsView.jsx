@@ -1,9 +1,17 @@
 // import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { useSelector } from "react-redux";
+import authSelectors from "../redux/auth/auth-selectors";
+import { addCollection } from "../services/ApiServices";
 // import * as flowersApi from "../services/flovershelf-api";
 import s from "../pages/AchimenesPage/AchimenesPage.module.css";
 
 export default function GeranDetailsView({ gerans }) {
+  const isLoggedIn = useSelector(authSelectors.getIsLoggedIn);
+
+  const userId = useSelector(authSelectors.getUserId);
+
+  console.log(userId);
   const { geranId } = useParams();
   const geran = gerans.find((geran) => geran._id === geranId);
   // const [geran, setGeran] = useState(null);
@@ -12,6 +20,11 @@ export default function GeranDetailsView({ gerans }) {
   // }, [geranId]);
   const onBack = () => {
     window.history.back();
+  };
+
+  const onAddToCollection = () => {
+    console.log(geran);
+    addCollection(geran);
   };
 
   return (
@@ -28,7 +41,11 @@ export default function GeranDetailsView({ gerans }) {
           <button className={s.button} onClick={onBack}>
             Повернутись до колекції
           </button>
-          <button className={s.button}>Додати до приватної колекції</button>
+          {isLoggedIn && (
+            <button className={s.button} onClick={onAddToCollection}>
+              Додати до приватної колекції
+            </button>
+          )}
         </div>
       </div>
     </>
