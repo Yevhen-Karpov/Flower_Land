@@ -4,25 +4,19 @@ import { useSelector } from "react-redux";
 import authSelectors from "../redux/auth/auth-selectors";
 import { addCollection } from "../services/ApiServices";
 import s from "../pages/AchimenesPage/AchimenesPage.module.css";
-// import getVioletById from "../services/ApiServices";
-// import * as flowersApi from "../services/flovershelf-api";
 
 export default function VioletsDetailsView({ violets }) {
   const isLoggedIn = useSelector(authSelectors.getIsLoggedIn);
   const { violetId } = useParams();
-  console.log(violets);
+
   const violet = violets.find((violet) => violet._id === violetId);
-  // const [violet, setViolet] = useState(null);
-  // useEffect(() => {
-  //   getVioletById(violetId).then(setViolet);
-  // }, [violetId]);
+
   const onBack = () => {
     window.history.back();
   };
 
   const onAddToCollection = () => {
-    console.log(violet);
-    addCollection(violet);
+    addCollection({ imgUrl: violet.imgUrl, title: violet.title });
   };
 
   return (

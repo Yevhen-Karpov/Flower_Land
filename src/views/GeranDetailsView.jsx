@@ -3,28 +3,21 @@ import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import authSelectors from "../redux/auth/auth-selectors";
 import { addCollection } from "../services/ApiServices";
-// import * as flowersApi from "../services/flovershelf-api";
+
 import s from "../pages/AchimenesPage/AchimenesPage.module.css";
 
 export default function GeranDetailsView({ gerans }) {
   const isLoggedIn = useSelector(authSelectors.getIsLoggedIn);
-
-  const userId = useSelector(authSelectors.getUserId);
-
-  console.log(userId);
   const { geranId } = useParams();
+
   const geran = gerans.find((geran) => geran._id === geranId);
-  // const [geran, setGeran] = useState(null);
-  // useEffect(() => {
-  //   flowersApi.getGeranById(geranId).then(setGeran);
-  // }, [geranId]);
+
   const onBack = () => {
     window.history.back();
   };
 
   const onAddToCollection = () => {
-    console.log(geran);
-    addCollection(geran);
+    addCollection({ imgUrl: geran.imgUrl, title: geran.title });
   };
 
   return (

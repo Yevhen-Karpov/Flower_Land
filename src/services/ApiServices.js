@@ -159,3 +159,13 @@ export async function deleteCollection(id) {
     console.log(e.message);
   }
 }
+
+export async function updateAchimeneById(id) {
+  try {
+    const { data } = await axios.patch(`/api/achimenes/${id}/active`);
+    console.log(data);
+    return data;
+  } catch (e) {
+    console.log(e.message);
+  }
+}

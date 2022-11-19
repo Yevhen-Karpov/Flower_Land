@@ -35,12 +35,7 @@ export const store = configureStore({
     // collections: collectionsReducer,
   },
   middleware,
-  // middleware: (getDefaultMiddleware) =>
-  //   getDefaultMiddleware({
-  //     serializableCheck: {
-  //       ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
-  //     },
-  //   }),
+  
   devTools: process.env.NODE_ENV === "development",
 });
 

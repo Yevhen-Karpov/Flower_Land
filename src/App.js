@@ -9,6 +9,7 @@ import "react-toastify/dist/ReactToastify.css";
 import HomePage from "./pages/HomePage/HomePage";
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
+
 import PrivateRoute from "./components/Routes/PrivateRoute";
 import PublicRoute from "./components/Routes/PublicRoute";
 
@@ -18,6 +19,7 @@ const GeranPage = lazy(() => import("./pages/GeranPage/GeranPage"));
 const PrivateCollectionPage = lazy(() =>
   import("./pages/PrivateCollectionPage/PrivateCollectionPage")
 );
+
 const LoginForm = lazy(() => import("./pages/LoginPage/LoginForm"));
 const RegisterForm = lazy(() => import("./pages/RegisterPage/RegisterForm"));
 
