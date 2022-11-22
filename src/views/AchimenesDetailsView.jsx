@@ -28,6 +28,13 @@ export default function AchimenesDetailsView({ achimenes }) {
         </div>
         <div className={s.cardDescr}>
           <p className={s.descr}>{achimene.descr}</p>
+          <p className={s.price}>
+            <span className={s.span}> Ціна:</span> {achimene.price}
+          </p>
+          <p className={s.price}>
+            <span className={s.span}>Наявність:</span>
+            {achimene.status}
+          </p>
           <button className={s.button} onClick={onBack}>
             Повернутись до колекції
           </button>
