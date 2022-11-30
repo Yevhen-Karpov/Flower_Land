@@ -31,6 +31,10 @@ export default function GeranDetailsView({ gerans }) {
 
         <div className={s.cardDescr}>
           <p className={s.descr}>{geran.descr}</p>
+          <p className={s.price}>
+            <span className={s.span}>Наявність: </span>
+            {geran.status}
+          </p>
           <button className={s.button} onClick={onBack}>
             Повернутись до колекції
           </button>

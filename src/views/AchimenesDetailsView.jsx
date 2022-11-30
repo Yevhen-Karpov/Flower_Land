@@ -23,16 +23,16 @@ export default function AchimenesDetailsView({ achimenes }) {
       <hr />
       <div className={s.cardView}>
         <div className={s.card}>
-          <img src={achimene.imgUrl} alt={achimene.title} width={316} />
+          <img src={achimene.imgUrl} alt={achimene.title} className={s.img} />
           <h2 className={s.name}>{achimene.title}</h2>
         </div>
         <div className={s.cardDescr}>
           <p className={s.descr}>{achimene.descr}</p>
-          <p className={s.price}>
+          {/* <p className={s.price}>
             <span className={s.span}> Ціна:</span> {achimene.price}
-          </p>
+          </p> */}
           <p className={s.price}>
-            <span className={s.span}>Наявність:</span>
+            <span className={s.span}>Наявність: </span>
             {achimene.status}
           </p>
           <button className={s.button} onClick={onBack}>

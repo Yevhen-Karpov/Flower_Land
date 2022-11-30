@@ -29,6 +29,10 @@ export default function VioletsDetailsView({ violets }) {
         </div>
         <div className={s.cardDescr}>
           <p className={s.descr}>{violet.descr}</p>
+          <p className={s.price}>
+            <span className={s.span}>Наявність: </span>
+            {violet.status}
+          </p>
           <button className={s.button} onClick={onBack}>
             Повернутись до колекції
           </button>
