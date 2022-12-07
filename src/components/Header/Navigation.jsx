@@ -54,6 +54,17 @@ const Navigation = () => {
             Колекція гераней
           </NavLink>
         </li>
+        <li className={s.navItem}>
+          <NavLink
+            style={{
+              textDecoration: "none",
+            }}
+            to="/comments"
+            activeClassName={s.active}
+          >
+            Коментарі
+          </NavLink>
+        </li>
         {isLoggedIn && (
           <li className={s.navItem}>
             <NavLink

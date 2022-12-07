@@ -169,3 +169,23 @@ export async function updateAchimeneById(id) {
     console.log(e.message);
   }
 }
+
+export async function getComments() {
+  try {
+    const { data } = await axios.get("/api/comments");
+    console.log(data.data.result);
+    return data.data.result;
+  } catch (e) {
+    console.log(e.message);
+  }
+}
+
+export async function addComment(comment) {
+  try {
+    const { data } = await axios.post("/api/comments", comment);
+    console.log(data);
+    return data;
+  } catch (e) {
+    console.log(e.message);
+  }
+}

@@ -16,6 +16,7 @@ import PublicRoute from "./components/Routes/PublicRoute";
 const AchimenesPage = lazy(() => import("./pages/AchimenesPage/AchimenesPage"));
 const VioletsPage = lazy(() => import("./pages/VioletsPage/VioletsPage"));
 const GeranPage = lazy(() => import("./pages/GeranPage/GeranPage"));
+const CommentsPage = lazy(() => import("./pages/CommentsPage/CommentsPage"));
 const PrivateCollectionPage = lazy(() =>
   import("./pages/PrivateCollectionPage/PrivateCollectionPage")
 );
@@ -43,6 +44,8 @@ export default function App() {
           <PublicRoute path="/violets" component={VioletsPage} />
 
           <PublicRoute path="/gerans" component={GeranPage} />
+
+          <PublicRoute path="/comments" component={CommentsPage} />
 
           <PublicRoute
             path="/login"

@@ -1,0 +1,21 @@
+.paginationWrap {
+  display: flex;
+  gap: 4px;
+  width: 100%;
+  margin-top: 16px;
+  justify-content: center;
+}
+.btn {
+  width: 36px;
+  height: 20px;
+  border-radius: 4px;
+  color: var(--main-background);
+  background-color: var(--accent-text-color);
+  text-align: center;
+  border-style: none;
+  cursor: pointer;
+}
+.btn:hover,
+.btn:focus {
+  background-color: var(--button-hover);
+}
