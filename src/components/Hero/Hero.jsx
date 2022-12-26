@@ -8,7 +8,9 @@ export default function Hero() {
   return (
     <section className={s.hero}>
       <div>
-        <h1 className={s.title}>Створюю красу та затишок в вашій оселі</h1>
+        <h1 className={s.title}>
+          Допоможу створити власну коллекцію квітів в вашій оселі
+        </h1>
         <button type="button" className={s.btn} onClick={toggleModal}>
           Залишити заявку
         </button>

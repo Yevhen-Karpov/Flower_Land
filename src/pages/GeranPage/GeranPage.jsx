@@ -2,17 +2,28 @@ import { useEffect, useState } from "react";
 import { Link, useRouteMatch, Route } from "react-router-dom";
 import { getGerans } from "../../services/ApiServices";
 import GeranDetailsView from "../../views/GeranDetailsView";
+import PaginationNew from "../../components/Pagination/PaginationNew";
 import { animateScroll as scroll } from "react-scroll";
 import s from "./GeranPage.module.css";
 
 export default function GeranPage() {
   const { url, path } = useRouteMatch();
   const [gerans, setGerans] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [commentsPerPage] = useState(10);
 
   useEffect(() => {
     getGerans().then(setGerans);
     scroll.scrollMore(400);
   }, []);
+
+  const lastIndex = currentPage * commentsPerPage;
+  const firstIndex = lastIndex - commentsPerPage;
+  const currentGerans = gerans.slice(firstIndex, lastIndex);
+
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+  const nextPage = () => setCurrentPage((prev) => prev + 1);
+  const prevPage = () => setCurrentPage((prev) => prev - 1);
 
   return (
     <div className={s.container}>
@@ -32,23 +43,39 @@ export default function GeranPage() {
         рослину або почати використовувати її в лікувальних цілях, важливо
         переконатися, що це не буде шкідливим.
       </p>
+      <h2 className={s.title}>
+        Деякі зображення квітів у колекції можуть не відповідати наявним, а є
+        лише прикладом цвітіння даного сорту.
+        <span className={s.span1}>
+          Щоб дізнатись докладніше, натисни на зображення.
+        </span>
+      </h2>
       {gerans && (
         <ul className={s.wrapper}>
-          {gerans.map((geran) => (
+          {currentGerans.map((geran) => (
             <li
               key={geran._id}
               className={s.card}
               onClick={() => scroll.scrollMore(600)}
             >
-              <img src={geran.imgUrl} alt={geran.title} className={s.img} />
-              <Link to={`${url}/${geran._id}`} className={s.name}>
-                {geran.title}
+              <Link
+                to={`${url}/${geran._id}`}
+                style={{ textDecoration: "none" }}
+              >
+                <img src={geran.imgUrl} alt={geran.title} className={s.img} />
+                <p className={s.name}>{geran.title}</p>
               </Link>
             </li>
           ))}
         </ul>
       )}
-
+      <PaginationNew
+        itemsPerPage={commentsPerPage}
+        totalItems={gerans.length}
+        paginate={paginate}
+        nextPage={nextPage}
+        prevPage={prevPage}
+      />
       <Route path={`${path}/:geranId`}>
         {gerans && <GeranDetailsView gerans={gerans} />}
       </Route>

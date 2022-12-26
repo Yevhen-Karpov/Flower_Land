@@ -26,7 +26,7 @@
 }
 @media screen and (min-width: 1200px) {
   .logo {
-    margin-right: 93px;
+    margin-right: 53px;
   }
 }
 .logoImg {
@@ -103,8 +103,8 @@
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
-    margin-right: 50px;
-    width: 700px;
+    /* margin-right: 20px; */
+    width: 800px;
     /* padding-top: 18px;
     padding-bottom: 18px; */
   }

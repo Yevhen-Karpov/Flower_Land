@@ -25,6 +25,7 @@ export default function About() {
               До колекціі
             </Link>
           </li>
+
           <li className={s.example}>
             <div className={s.picture}>
               <img src={viol} alt="violets" width={370} height={320} />
@@ -40,6 +41,7 @@ export default function About() {
               До колекціі
             </Link>
           </li>
+
           <li className={s.example}>
             <div className={s.picture}>
               <img src={heran} alt="heran" width={370} height={320} />

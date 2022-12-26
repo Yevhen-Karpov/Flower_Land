@@ -51,7 +51,7 @@ const Navigation = () => {
             to="/gerans"
             activeClassName={s.active}
           >
-            Колекція гераней
+            Колекція геранів
           </NavLink>
         </li>
         <li className={s.navItem}>

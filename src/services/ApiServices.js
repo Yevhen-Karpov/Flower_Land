@@ -1,4 +1,5 @@
 import axios from "axios";
+import { toast } from "react-toastify";
 axios.defaults.baseURL = "https://flowers-gallery.herokuapp.com";
 
 class ApiServices {
@@ -144,8 +145,10 @@ export async function addCollection(collection) {
   try {
     const { data } = await axios.post("/api/collections", collection);
     console.log(data);
+    toast.success("Квітка успішно додана до колекції");
     return data;
   } catch (e) {
+    toast.error("Квітка вже є в колекції");
     console.log(e.message);
   }
 }
@@ -180,9 +183,12 @@ export async function getComments() {
   }
 }
 
-export async function addComment(comment) {
+export async function addComment(comment, cb = () => {}) {
   try {
-    const { data } = await axios.post("/api/comments", comment);
+    const { data, status } = await axios.post("/api/comments", comment);
+    if (status < 300) {
+      cb();
+    }
     console.log(data);
     return data;
   } catch (e) {

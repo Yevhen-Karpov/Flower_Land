@@ -48,9 +48,9 @@
 
 .btn {
   display: block;
-  width: 100px;
-  height: 100px;
-  background-image: url(../../images/comment-png-22727.jpg);
+  width: 50px;
+  height: 50px;
+  background-image: url(../../images/add-bubble.svg);
   background-size: contain;
   background-position: center;
   background-repeat: no-repeat;

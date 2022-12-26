@@ -2,17 +2,28 @@ import { useState, useEffect } from "react";
 import { Link, useRouteMatch, Route } from "react-router-dom";
 import { animateScroll as scroll } from "react-scroll";
 import { getViolets } from "../../services/ApiServices";
+import PaginationNew from "../../components/Pagination/PaginationNew";
 import VioletsDetailsView from "../../views/VioletsDetailsView";
 import s from "./VioletsPage.module.css";
 
 export default function ViolesPage() {
   const { url, path } = useRouteMatch();
   const [violets, setViolets] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [commentsPerPage] = useState(10);
 
   useEffect(() => {
     getViolets().then(setViolets);
     scroll.scrollMore(400);
   }, []);
+
+  const lastIndex = currentPage * commentsPerPage;
+  const firstIndex = lastIndex - commentsPerPage;
+  const currentViolets = violets.slice(firstIndex, lastIndex);
+
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+  const nextPage = () => setCurrentPage((prev) => prev + 1);
+  const prevPage = () => setCurrentPage((prev) => prev - 1);
 
   return (
     <div className={s.container}>
@@ -37,23 +48,39 @@ export default function ViolesPage() {
         доглядати за ними потрібно однаково, а це, безумовно, робить життя
         «колекціонера», та й простого квітникаря набагато легшим.
       </p>
+      <h2 className={s.title}>
+        Деякі зображення квітів у колекції можуть не відповідати наявним, а є
+        лише прикладом цвітіння даного сорту.
+        <span className={s.span1}>
+          Щоб дізнатись докладніше, натисни на зображення.
+        </span>
+      </h2>
       {violets && (
         <ul className={s.wrapper}>
-          {violets.map((violet) => (
+          {currentViolets.map((violet) => (
             <li
               key={violet._id}
               className={s.card}
               onClick={() => scroll.scrollMore(600)}
             >
-              <img src={violet.imgUrl} alt={violet.title} className={s.img} />
-              <Link to={`${url}/${violet._id}`} className={s.name}>
-                {violet.title}
+              <Link
+                to={`${url}/${violet._id}`}
+                style={{ textDecoration: "none" }}
+              >
+                <img src={violet.imgUrl} alt={violet.title} className={s.img} />
+                <p className={s.name}>{violet.title}</p>
               </Link>
             </li>
           ))}
         </ul>
       )}
-
+      <PaginationNew
+        itemsPerPage={commentsPerPage}
+        totalItems={violets.length}
+        paginate={paginate}
+        nextPage={nextPage}
+        prevPage={prevPage}
+      />
       <Route path={`${path}/:violetId`}>
         {violets && <VioletsDetailsView violets={violets} />}
       </Route>

@@ -16,15 +16,16 @@ export default function Footer() {
           </a>
           <address className="footer__address">
             <p className="footer__address-text">
-              м. Харків, вул. Сергія Грицевця, буд.50
+              м. Харків, вул. Сергія Грицевця
             </p>
+
             <ul className="list">
               <li className="footer__contact">
                 <a
                   href="mailto:info@devstudio.com"
                   className="footer__contact-link"
                 >
-                  info@devstudio.com
+                  helenkarp777@gmail.com
                 </a>
               </li>
               <li className="footer__contact">
@@ -36,29 +37,33 @@ export default function Footer() {
           </address>
         </div>
         <div className="footer__social">
-          <h3 className="footer__social-title">Приєднуйтесь</h3>
+          <h3 className="footer__social-title">Подивись на </h3>
           <ul className="list social">
-            <li className="social__item">
+            {/* <li className="social__item">
               <a href="#" className="social__link footer__social-link">
                 <FaInstagram className="social__icon footer__icon" />
               </a>
-            </li>
-            <li className="social__item">
+            </li> */}
+            {/* <li className="social__item">
               <a href="#" className="social__link footer__social-link">
                 <FaFacebookF className="social__icon footer__icon" />
               </a>
-            </li>
-            <li className="social__item">
+            </li> */}
+            {/* <li className="social__item">
               <a href="#" className="social__link footer__social-link">
                 <FaTelegramPlane className="social__icon footer__icon" />
               </a>
-            </li>
+            </li> */}
             <li className="social__item">
-              <a href="#" className="social__link footer__social-link">
+              <a
+                href="#"
+                target={"_blank"}
+                className="social__link footer__social-link"
+              >
                 <img
                   src={Logo}
                   className="social__icon footer__icon"
-                  alt="linkedin"
+                  alt="olx logo"
                 />
               </a>
             </li>

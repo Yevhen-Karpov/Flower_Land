@@ -3,16 +3,27 @@ import { Link, useRouteMatch, Route } from "react-router-dom";
 import { animateScroll as scroll } from "react-scroll";
 import { getAchimenes } from "../../services/ApiServices";
 import AchimenesDetailsView from "../../views/AchimenesDetailsView";
+import PaginationNew from "../../components/Pagination/PaginationNew";
 import s from "./AchimenesPage.module.css";
 
 export default function AchimenesPage() {
   const { url, path } = useRouteMatch();
   const [achimenes, setAchimenes] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [commentsPerPage] = useState(10);
 
   useEffect(() => {
     getAchimenes().then(setAchimenes);
     scroll.scrollMore(400);
   }, []);
+
+  const lastIndex = currentPage * commentsPerPage;
+  const firstIndex = lastIndex - commentsPerPage;
+  const currentAchimenes = achimenes.slice(firstIndex, lastIndex);
+
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+  const nextPage = () => setCurrentPage((prev) => prev + 1);
+  const prevPage = () => setCurrentPage((prev) => prev - 1);
 
   return (
     <div className={s.container}>
@@ -29,9 +40,16 @@ export default function AchimenesPage() {
         місяців. На зиму, коли він починається, ахіменес обрізають, а бульби
         ховають в темне прохолодне місце.
       </p>
+      <h2 className={s.title}>
+        Деякі зображення квітів у колекції можуть не відповідати наявним, а є
+        лише прикладом цвітіння даного сорту.
+        <span className={s.span1}>
+          Щоб дізнатись докладніше, натисни на зображення.
+        </span>
+      </h2>
       {achimenes.length && (
         <ul className={s.wrapper}>
-          {achimenes.map(
+          {currentAchimenes.map(
             (achimen) =>
               achimen.active === true && (
                 <li
@@ -39,20 +57,29 @@ export default function AchimenesPage() {
                   className={s.card}
                   onClick={() => scroll.scrollMore(600)}
                 >
-                  <img
-                    src={achimen.imgUrl}
-                    alt={achimen.title}
-                    className={s.img}
-                  />
-                  <Link to={`${url}/${achimen._id}`} className={s.name}>
-                    {achimen.title}
+                  <Link
+                    to={`${url}/${achimen._id}`}
+                    style={{ textDecoration: "none" }}
+                  >
+                    <img
+                      src={achimen.imgUrl}
+                      alt={achimen.title}
+                      className={s.img}
+                    />
+                    <p className={s.name}>{achimen.title}</p>
                   </Link>
                 </li>
               )
           )}
         </ul>
       )}
-
+      <PaginationNew
+        itemsPerPage={commentsPerPage}
+        totalItems={achimenes.length}
+        paginate={paginate}
+        nextPage={nextPage}
+        prevPage={prevPage}
+      />
       <Route path={`${path}/:achimeneId`}>
         {achimenes && <AchimenesDetailsView achimenes={achimenes} />}
       </Route>
