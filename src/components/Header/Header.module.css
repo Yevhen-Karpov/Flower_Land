@@ -14,12 +14,12 @@
   position: relative;
 }
 
-@media screen and (max-width: 767px) {
+/* @media screen and (max-width: 767px) {
   .header {
     padding-top: 16px;
     padding-bottom: 16px;
   }
-}
+} */
 
 .logo {
   text-decoration: none;
@@ -30,7 +30,7 @@
   }
 }
 .logoImg {
-  width: 200px;
+  width: 160px;
   height: 100px;
   /* margin-top: 20px;
   margin-bottom: 20px; */

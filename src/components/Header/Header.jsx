@@ -2,7 +2,7 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { BsEnvelope, BsTelephone, BsMenuUp, BsXCircle } from "react-icons/bs";
-import logo from "../../images/pngwing.png";
+import logo from "../../images/logo1.png";
 import s from "./Header.module.css";
 import AuthNav from "./AuthNav";
 import Navigation from "./Navigation";

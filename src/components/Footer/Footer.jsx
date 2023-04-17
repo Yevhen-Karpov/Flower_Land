@@ -12,7 +12,7 @@ export default function Footer() {
       <div className="container footer__container">
         <div className="">
           <a href="/" className="logo footer__logo">
-            Flowers<span className="footer__span">Shop</span>
+            Flower<span className="footer__span">Land</span>
           </a>
           <address className="footer__address">
             <p className="footer__address-text">
@@ -39,11 +39,15 @@ export default function Footer() {
         <div className="footer__social">
           <h3 className="footer__social-title">Подивись на </h3>
           <ul className="list social">
-            {/* <li className="social__item">
-              <a href="#" className="social__link footer__social-link">
+            <li className="social__item">
+              <a
+                href="https://instagram.com/helen_ka_flowers?igshid=ZDdkNTZiNTM="
+                target={"_blank"}
+                className="social__link footer__social-link"
+              >
                 <FaInstagram className="social__icon footer__icon" />
               </a>
-            </li> */}
+            </li>
             {/* <li className="social__item">
               <a href="#" className="social__link footer__social-link">
                 <FaFacebookF className="social__icon footer__icon" />
@@ -56,7 +60,7 @@ export default function Footer() {
             </li> */}
             <li className="social__item">
               <a
-                href="#"
+                href="https://www.olx.ua/d/uk/list/user/1rUvz/"
                 target={"_blank"}
                 className="social__link footer__social-link"
               >

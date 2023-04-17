@@ -270,9 +270,9 @@ li {
 
 .modal-form-comments {
   display: inline-block;
-  resize: none;
+  resize: vertical;
   width: 92%;
-  height: 120px;
+  min-height: 120px;
   padding: 12px 16px;
   border: 1px solid rgba(33, 33, 33, 0.2);
   border-radius: 4px;
@@ -382,7 +382,8 @@ li {
   display: flex;
   -webkit-box-pack: justify;
   -ms-flex-pack: justify;
-  justify-content: space-between;
+  justify-content: start;
+  gap: 20px;
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
