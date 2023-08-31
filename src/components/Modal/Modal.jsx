@@ -5,6 +5,12 @@ import s from "./Modal.module.css";
 
 const modalRoot = document.querySelector("#modal-root");
 
+const encode = (data) => {
+  return Object.keys(data)
+    .map((key) => encodeURIComponent(key) + "=" + encodeURIComponent(data[key]))
+    .join("&");
+};
+
 export default function Modal({ onClose }) {
   const values = {
     name: "",
@@ -42,6 +48,15 @@ export default function Modal({ onClose }) {
   };
 
   const handleSubmit = (e) => {
+    // e.preventDefault();
+    fetch("/", {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: encode({ "form-name": "contact", ...valuesState }),
+    })
+      .then(() => alert("Success!"))
+      .catch((error) => alert(error));
+
     e.preventDefault();
     console.log(valuesState);
     reset();
