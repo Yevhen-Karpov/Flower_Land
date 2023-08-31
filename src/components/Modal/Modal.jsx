@@ -54,7 +54,7 @@ export default function Modal({ onClose }) {
   return createPortal(
     <div className={s.overlay} onClick={handleBackdropClick}>
       <div className={s.modal}>
-        <form className="modal-form" onSubmit={handleSubmit}>
+        <form className="modal-form" onSubmit={handleSubmit} netlify>
           <button type="button" className="modal-close-btn" onClick={onClose}>
             <BsXLg className="modal-close-icon" widths={30} height={30} />
           </button>
