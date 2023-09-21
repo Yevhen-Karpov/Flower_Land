@@ -98,6 +98,7 @@ li {
   --button-hover: #2b6636;
   --span-header: #000000;
   --fill-icon: #afb1b8;
+  --header-text-color: #072c02;
 }
 
 .modal-btn {
@@ -1384,4 +1385,44 @@ li {
 .card-photo {
   max-width: 100%;
   height: auto;
+}
+@media screen and (min-width: 768px) {
+  .active {
+    font-size: 16px;
+    color: var(--accent-text-color);
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    -webkit-transition: color 250ms cubic-bezier(0.4, 0, 0.2, 1);
+    transition: color 250ms cubic-bezier(0.4, 0, 0.2, 1);
+    text-decoration: none;
+    position: relative;
+    text-shadow: 0 0 15px #fff, 0 0 20px #49ff18, 0 0 30px #49ff18,
+      0 0 55px #49ff18, 0 0 75px #49ff18, 2px 2px 2px rgba(206, 89, 55, 0);
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .active::after {
+    position: absolute;
+    content: "";
+    width: 100%;
+    height: 6px;
+    top: 61px;
+    left: 0;
+    background: var(--accent-text-color);
+    border-radius: 2px;
+  }
+}
+.pending {
+  font-size: 16px;
+  color: var(--header-text-color);
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  -webkit-transition: color 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  transition: color 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  text-decoration: none;
+}
+.pending:hover,
+.pending:focus {
+  color: #5fe33b;
 }

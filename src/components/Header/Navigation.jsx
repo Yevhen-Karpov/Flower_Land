@@ -11,56 +11,50 @@ const Navigation = () => {
       <ul className={s.nav}>
         <li className={s.navItem}>
           <NavLink
-            style={{
-              textDecoration: "none",
+            className={({ isActive }) => {
+              return isActive ? "active" : "pending";
             }}
-            exact
             to="/"
-            activeClassName={s.active}
           >
             Головна
           </NavLink>
         </li>
         <li className={s.navItem}>
           <NavLink
-            style={{
-              textDecoration: "none",
+            className={({ isActive }) => {
+              return isActive ? "active" : "pending";
             }}
             to="/achimenes"
-            activeClassName={s.active}
           >
             Колекція ахіменесів
           </NavLink>
         </li>
         <li className={s.navItem}>
           <NavLink
-            style={{
-              textDecoration: "none",
+            className={({ isActive }) => {
+              return isActive ? "active" : "pending";
             }}
             to="/violets"
-            activeClassName={s.active}
           >
             Колекція фіалок
           </NavLink>
         </li>
         <li className={s.navItem}>
           <NavLink
-            style={{
-              textDecoration: "none",
+            className={({ isActive }) => {
+              return isActive ? "active" : "pending";
             }}
             to="/gerans"
-            activeClassName={s.active}
           >
             Колекція геранів
           </NavLink>
         </li>
         <li className={s.navItem}>
           <NavLink
-            style={{
-              textDecoration: "none",
+            className={({ isActive }) => {
+              return isActive ? "active" : "pending";
             }}
             to="/comments"
-            activeClassName={s.active}
           >
             Коментарі
           </NavLink>
@@ -68,11 +62,10 @@ const Navigation = () => {
         {isLoggedIn && (
           <li className={s.navItem}>
             <NavLink
-              style={{
-                textDecoration: "none",
+              className={({ isActive }) => {
+                return isActive ? "active" : "pending";
               }}
               to="/collections"
-              activeClassName={s.active}
             >
               Приватна колекція
             </NavLink>

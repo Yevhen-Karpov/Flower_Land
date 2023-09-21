@@ -22,7 +22,7 @@ export default function Footer() {
             <ul className="list">
               <li className="footer__contact">
                 <a
-                  href="mailto:info@devstudio.com"
+                  href="mailto:helenkarp777@gmail.com"
                   className="footer__contact-link"
                 >
                   helenkarp777@gmail.com

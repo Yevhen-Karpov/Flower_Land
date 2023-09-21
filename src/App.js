@@ -1,17 +1,13 @@
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { Switch } from "react-router-dom";
-import { Suspense, lazy } from "react";
+import { Routes, Route } from "react-router-dom";
+import { lazy } from "react";
 import authOperations from "./redux/auth/auth-operations";
-import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
+import Layout from "./components/Layout/layout";
 import HomePage from "./pages/HomePage/HomePage";
-import Header from "./components/Header/Header";
-import Footer from "./components/Footer/Footer";
-
-import PrivateRoute from "./components/Routes/PrivateRoute";
-import PublicRoute from "./components/Routes/PublicRoute";
+// import PrivateRoute from "./components/Routes/PrivateRoute";
+// import PublicRoute from "./components/Routes/PublicRoute";
 
 const AchimenesPage = lazy(() => import("./pages/AchimenesPage/AchimenesPage"));
 const VioletsPage = lazy(() => import("./pages/VioletsPage/VioletsPage"));
@@ -23,6 +19,9 @@ const PrivateCollectionPage = lazy(() =>
 
 const LoginForm = lazy(() => import("./pages/LoginPage/LoginForm"));
 const RegisterForm = lazy(() => import("./pages/RegisterPage/RegisterForm"));
+const AchimenesDetailsView = lazy(() => import("./views/AchimenesDetailsView"));
+const VioletsDetailsView = lazy(() => import("./views/VioletsDetailsView"));
+const GeranDetailsView = lazy(() => import("./views/GeranDetailsView"));
 
 export default function App() {
   const dispatch = useDispatch();
@@ -33,36 +32,40 @@ export default function App() {
 
   return (
     <>
-      <ToastContainer autoClose={5000} pauseOnHover theme="colored" />
-      <Header />
-      <Switch>
-        <Suspense fallback={<h1>Loading...</h1>}>
-          <PublicRoute path="/" exact component={HomePage} />
+      {/* <Suspense fallback={<h1>Loading...</h1>}> */}
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          <Route index element={<HomePage />} />
+          <Route path="achimenes" element={<AchimenesPage />}>
+            <Route path=":achimeneId" element={<AchimenesDetailsView />} />
+          </Route>
 
-          <PublicRoute path="/achimenes" component={AchimenesPage} />
+          <Route path="violets" element={<VioletsPage />}>
+            <Route path=":violetId" element={<VioletsDetailsView />} />
+          </Route>
 
-          <PublicRoute path="/violets" component={VioletsPage} />
+          <Route path="gerans" element={<GeranPage />}>
+            <Route path=":geranId" element={<GeranDetailsView />} />
+          </Route>
 
-          <PublicRoute path="/gerans" component={GeranPage} />
+          <Route path="comments" element={<CommentsPage />} />
 
-          <PublicRoute path="/comments" component={CommentsPage} />
-
-          <PublicRoute
+          <Route
             path="/login"
             restricted
             redirectTo="/collections"
-            component={LoginForm}
+            element={<LoginForm />}
           />
-          <PublicRoute path="/register" restricted component={RegisterForm} />
+          <Route path="/register" restricted element={<RegisterForm />} />
 
-          <PrivateRoute
+          <Route
             path="/collections"
-            component={PrivateCollectionPage}
+            element={<PrivateCollectionPage />}
             redirectTo="/login"
           />
-        </Suspense>
-      </Switch>
-      <Footer />
+        </Route>
+      </Routes>
+      {/* </Suspense> */}
     </>
   );
 }

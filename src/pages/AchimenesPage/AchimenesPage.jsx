@@ -1,13 +1,11 @@
 import { useState, useEffect } from "react";
-import { Link, useRouteMatch, Route } from "react-router-dom";
+import { Link, Outlet } from "react-router-dom";
 import { animateScroll as scroll } from "react-scroll";
 import { getAchimenes } from "../../services/ApiServices";
-import AchimenesDetailsView from "../../views/AchimenesDetailsView";
 import PaginationNew from "../../components/Pagination/PaginationNew";
 import s from "./AchimenesPage.module.css";
 
 export default function AchimenesPage() {
-  const { url, path } = useRouteMatch();
   const [achimenes, setAchimenes] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [commentsPerPage] = useState(10);
@@ -16,7 +14,7 @@ export default function AchimenesPage() {
     getAchimenes().then(setAchimenes);
     scroll.scrollMore(400);
   }, []);
-
+  console.log(achimenes);
   const lastIndex = currentPage * commentsPerPage;
   const firstIndex = lastIndex - commentsPerPage;
   const currentAchimenes = achimenes.slice(firstIndex, lastIndex);
@@ -58,7 +56,7 @@ export default function AchimenesPage() {
                   onClick={() => scroll.scrollMore(600)}
                 >
                   <Link
-                    to={`${url}/${achimen._id}`}
+                    to={`${achimen._id}`}
                     style={{ textDecoration: "none" }}
                   >
                     <img
@@ -73,6 +71,7 @@ export default function AchimenesPage() {
           )}
         </ul>
       )}
+
       <PaginationNew
         itemsPerPage={commentsPerPage}
         totalItems={achimenes.length}
@@ -80,9 +79,8 @@ export default function AchimenesPage() {
         nextPage={nextPage}
         prevPage={prevPage}
       />
-      <Route path={`${path}/:achimeneId`}>
-        {achimenes && <AchimenesDetailsView achimenes={achimenes} />}
-      </Route>
+
+      <Outlet />
     </div>
   );
 }

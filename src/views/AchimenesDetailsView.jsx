@@ -3,15 +3,26 @@ import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import authSelectors from "../redux/auth/auth-selectors";
-import { addCollection, getCollection } from "../services/ApiServices";
+import {
+  addCollection,
+  getCollection,
+  getAchimeneById,
+} from "../services/ApiServices";
 import s from "../pages/AchimenesPage/AchimenesPage.module.css";
 
-export default function AchimenesDetailsView({ achimenes }) {
+export default function AchimenesDetailsView() {
   const isLoggedIn = useSelector(authSelectors.getIsLoggedIn);
   const [privateCollections, setPrivateCollections] = useState(null);
+  const [achimene, setAchimene] = useState([]);
   const { achimeneId } = useParams();
 
-  const achimene = achimenes.find((achimen) => achimen._id === achimeneId);
+  // const achimene = achimenes.find((achimen) => achimen._id === achimeneId);
+
+  useEffect(() => {
+    getAchimeneById(achimeneId).then(setAchimene);
+  }, [achimeneId]);
+
+  console.log(achimene);
 
   const onBack = () => {
     window.history.back();

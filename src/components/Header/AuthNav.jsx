@@ -1,6 +1,5 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-import s from "./Header.module.css";
 
 export default function AuthNav() {
   const styles = {
@@ -8,7 +7,7 @@ export default function AuthNav() {
       display: "flex",
       width: 100,
       alignItems: "center",
-
+      gap: 20,
       marginLeft: 80,
     },
   };
@@ -16,28 +15,19 @@ export default function AuthNav() {
   return (
     <div style={styles.wrap}>
       <NavLink
-        to="/register"
-        exact
-        style={{
-          textDecoration: "none",
-          fontSize: "16px",
-          marginRight: 20,
+        className={({ isActive }) => {
+          return isActive ? "active" : "pending";
         }}
-        className={s.navNavLink}
-        activeClassName={s.active}
+        to="/register"
       >
         Реєстрація
       </NavLink>
 
       <NavLink
         to="/login"
-        exact
-        style={{
-          textDecoration: "none",
-          fontSize: "16px",
+        className={({ isActive }) => {
+          return isActive ? "active" : "pending";
         }}
-        className={s.navNavLink}
-        activeClassName={s.active}
       >
         Увійти
       </NavLink>

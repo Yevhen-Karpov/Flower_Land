@@ -1,13 +1,11 @@
 import { useEffect, useState } from "react";
-import { Link, useRouteMatch, Route } from "react-router-dom";
+import { Link, Outlet } from "react-router-dom";
 import { getGerans } from "../../services/ApiServices";
-import GeranDetailsView from "../../views/GeranDetailsView";
 import PaginationNew from "../../components/Pagination/PaginationNew";
 import { animateScroll as scroll } from "react-scroll";
 import s from "./GeranPage.module.css";
 
 export default function GeranPage() {
-  const { url, path } = useRouteMatch();
   const [gerans, setGerans] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [commentsPerPage] = useState(10);
@@ -58,10 +56,7 @@ export default function GeranPage() {
               className={s.card}
               onClick={() => scroll.scrollMore(600)}
             >
-              <Link
-                to={`${url}/${geran._id}`}
-                style={{ textDecoration: "none" }}
-              >
+              <Link to={`${geran._id}`} style={{ textDecoration: "none" }}>
                 <img src={geran.imgUrl} alt={geran.title} className={s.img} />
                 <p className={s.name}>{geran.title}</p>
               </Link>
@@ -69,6 +64,7 @@ export default function GeranPage() {
           ))}
         </ul>
       )}
+
       <PaginationNew
         itemsPerPage={commentsPerPage}
         totalItems={gerans.length}
@@ -76,9 +72,8 @@ export default function GeranPage() {
         nextPage={nextPage}
         prevPage={prevPage}
       />
-      <Route path={`${path}/:geranId`}>
-        {gerans && <GeranDetailsView gerans={gerans} />}
-      </Route>
+
+      <Outlet />
     </div>
   );
 }

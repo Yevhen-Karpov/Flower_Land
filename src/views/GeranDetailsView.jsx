@@ -1,18 +1,24 @@
-// import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import authSelectors from "../redux/auth/auth-selectors";
-import { addCollection, getCollection } from "../services/ApiServices";
+import {
+  addCollection,
+  getCollection,
+  getGeranById,
+} from "../services/ApiServices";
 import s from "../pages/AchimenesPage/AchimenesPage.module.css";
 
-export default function GeranDetailsView({ gerans }) {
+export default function GeranDetailsView() {
   const isLoggedIn = useSelector(authSelectors.getIsLoggedIn);
   const [privateCollections, setPrivateCollections] = useState(null);
+  const [geran, setGeran] = useState([]);
   const { geranId } = useParams();
 
-  const geran = gerans.find((geran) => geran._id === geranId);
+  useEffect(() => {
+    getGeranById(geranId).then(setGeran);
+  }, [geranId]);
 
   const onBack = () => {
     window.history.back();

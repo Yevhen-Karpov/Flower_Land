@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { toast } from "react-toastify";
 import { createPortal } from "react-dom";
 import { BsEnvelope, BsTelephone, BsXLg, BsPerson } from "react-icons/bs";
 import s from "./Modal.module.css";
@@ -54,8 +55,8 @@ export default function Modal({ onClose }) {
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
       body: encode({ "form-name": "contact", ...valuesState }),
     })
-      .then(() => alert("Success!"))
-      .catch((error) => alert(error));
+      .then(() => toast.success("Ваше повідомлення надіслано!"))
+      .catch(() => toast.error("Помилка! Повідомлення не надіслано!"));
 
     e.preventDefault();
     console.log(valuesState);

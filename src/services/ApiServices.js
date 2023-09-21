@@ -78,9 +78,9 @@ export async function getGerans() {
 export async function getAchimeneById(achimeneId) {
   console.log(achimeneId);
   try {
-    const result = await axios.get(`/api/achimenes/${achimeneId}`);
-    console.log(result);
-    return result;
+    const { data } = await axios.get(`/api/achimenes/${achimeneId}`);
+    console.log(data.data.result);
+    return data.data.result;
   } catch (e) {
     console.log(e.message);
   }
@@ -89,7 +89,7 @@ export async function getAchimeneById(achimeneId) {
 export async function getVioletById(violetId) {
   try {
     const { data } = await axios.get(`/api/violets/${violetId}`);
-    return data;
+    return data.data.result;
   } catch (e) {
     console.log(e.message);
   }
@@ -98,7 +98,7 @@ export async function getVioletById(violetId) {
 export async function getGeranById(geranId) {
   try {
     const { data } = await axios.get(`/api/gerans/${geranId}`);
-    return data;
+    return data.data.result;
   } catch (e) {
     console.log(e.message);
   }

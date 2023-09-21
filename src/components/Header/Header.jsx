@@ -1,5 +1,5 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+// import { NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { BsEnvelope, BsTelephone, BsMenuUp, BsXCircle } from "react-icons/bs";
 import logo from "../../images/logo1.png";
@@ -10,8 +10,6 @@ import LoginForm from "../../pages/LoginPage/LoginForm";
 import RegisterForm from "../../pages/RegisterPage/RegisterForm";
 import UserMenu from "./UserMenu";
 import authSelectors from "../../redux/auth/auth-selectors";
-
-// var classNames = require("classnames");
 
 export default function Header() {
   const [isModalOpen, setIsModalOpen] = React.useState(false);

@@ -1,13 +1,11 @@
 import { useState, useEffect } from "react";
-import { Link, useRouteMatch, Route } from "react-router-dom";
+import { Link, Outlet } from "react-router-dom";
 import { animateScroll as scroll } from "react-scroll";
 import { getViolets } from "../../services/ApiServices";
 import PaginationNew from "../../components/Pagination/PaginationNew";
-import VioletsDetailsView from "../../views/VioletsDetailsView";
 import s from "./VioletsPage.module.css";
 
 export default function ViolesPage() {
-  const { url, path } = useRouteMatch();
   const [violets, setViolets] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [commentsPerPage] = useState(10);
@@ -63,10 +61,7 @@ export default function ViolesPage() {
               className={s.card}
               onClick={() => scroll.scrollMore(600)}
             >
-              <Link
-                to={`${url}/${violet._id}`}
-                style={{ textDecoration: "none" }}
-              >
+              <Link to={`${violet._id}`} style={{ textDecoration: "none" }}>
                 <img src={violet.imgUrl} alt={violet.title} className={s.img} />
                 <p className={s.name}>{violet.title}</p>
               </Link>
@@ -74,6 +69,7 @@ export default function ViolesPage() {
           ))}
         </ul>
       )}
+
       <PaginationNew
         itemsPerPage={commentsPerPage}
         totalItems={violets.length}
@@ -81,9 +77,8 @@ export default function ViolesPage() {
         nextPage={nextPage}
         prevPage={prevPage}
       />
-      <Route path={`${path}/:violetId`}>
-        {violets && <VioletsDetailsView violets={violets} />}
-      </Route>
+
+      <Outlet />
     </div>
   );
 }
